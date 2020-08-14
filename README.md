@@ -15,7 +15,8 @@
 https://kingpogona.github.io/passgen-js/
 
 ## Screenshot
------ Placeholder until done -----
+![Screen Shot 2020-08-14 at 10 19 44 AM](https://user-images.githubusercontent.com/31211822/90270836-14eed800-de18-11ea-80d3-baac3113231a.png)
+
 
 ## Contribution
-Completed by Asher Clawson
+Password Generation code by Asher Clawson
