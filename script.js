@@ -16,45 +16,68 @@ function confirmTF(promptText) {
 
   let output = window.confirm("Do you want your password to contain " + promptText + " characters? Select 'OK' if you do or 'Cancel' if you don't.");
   console.log(output);
-  // debugger;
+
   return output;
 }
 
+// sets passwordOptions object values by running relevant functions
 function getPasswordSettings() {
 
   var options = {
-    legth: getLength(),
+    passLength: getLength(),
     lowerCase: confirmTF("lowercase"),
     upperCase: confirmTF("uppercase"),
     numeric: confirmTF("numeric"),
-    specialCharacter: confirmTF("special")
+    special: confirmTF("special")
   };
 
-  // console.log(options);
-  // debugger;
-
-  return options
+  return options;
 }
 
-//generate password function
+//generate password
 function generatePassword() {
 
-  var passwordOptions = getPasswordSettings()
-  console.log(passwordOptions)
-  debugger;
+  // define variables
+  var characterStrings = {
+    lower: "abcdefghijklmnopqrstuvwxyz",
+    upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numeric: "1234567890",
+    special: "!#$%&()*+,-./:;<=>?@[\]^_`{|}~"
+  };
 
+  var usedCharacters = "";
+  var passwordOptions = getPasswordSettings();
+  var strLength = 0;
+  let generatedPassword = "";
 
+  // console.log(passwordOptions);
+  // debugger;
 
+  // set characters to be used based on user input.
+  if (passwordOptions.lowerCase === true) {usedCharacters = usedCharacters + characterStrings.lower};
+  if (passwordOptions.upperCase === true) {usedCharacters = usedCharacters + characterStrings.upper};
+  if (passwordOptions.numeric === true) {usedCharacters = usedCharacters + characterStrings.numeric};
+  if (passwordOptions.special === true) {usedCharacters = usedCharacters + characterStrings.special};
+  if (passwordOptions.lowerCase !== true && passwordOptions.upperCase !== true && passwordOptions.numeric !== true && passwordOptions.special !== true) {
+    window.alert("A password was not generated because you didn't include any characters to be used. You must include at least one set of characters.")
+  }
+  
+  // console.log(usedCharacters);
+  // debugger;
 
+  strLength = usedCharacters.length;
 
-  //Characters to use for password: "this should be a variable of some kind to fill with what is listed below."
-  //special characters: "!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-  //lower: "abcdefghijklmnopqrstuvwxyz"
-  //upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  //numeric: "1234567890"
+  // console.log(strLength);
+  // debugger;
 
+  for (var i = 0; i < passwordOptions.passLength; i++) {
+    generatedPassword = generatedPassword + usedCharacters.charAt(Math.floor(Math.random() * strLength));
+  }
 
-  return "test";
+  // console.log(generatedPassword.length)
+  // debugger;
+
+  return generatedPassword;
 }
 
 // Write password to the #password input
